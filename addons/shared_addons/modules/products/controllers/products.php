@@ -15,11 +15,16 @@ class Products extends Public_Controller
 	}
 	
 	function view($slug){
-		$content =  'halaman produk yg akan ditampilakan sesuai dengan slug: <h3>' . $slug . '</h3>';
-	
-		$this->template
-		->title($this->module_details['name'])
-		->set('data', $content)
-		->build('products');
+		
+		if($this->products_m->get($slug)){
+			$content =  $this->products_m->get($slug);
+			
+			$this->template
+			->title($this->module_details['name'])
+			->set('data', $content)
+			->build('products');
+		}else{
+			//Redirect to Missing Page
+		}
 	}
 }

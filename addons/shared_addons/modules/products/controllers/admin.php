@@ -12,7 +12,7 @@ class Admin extends Admin_Controller {
 	 *
 	 * @var string
 	 */
-	protected $section = 'pages';
+	protected $section = 'products';
 
 	/**
 	 * Constructor method
@@ -25,7 +25,6 @@ class Admin extends Admin_Controller {
 	{
 		parent::__construct();
 		
-		
 		$this->load->model('products_m');
 	}
 
@@ -34,22 +33,13 @@ class Admin extends Admin_Controller {
 	 */
 	public function index()
 	{
-		$this->template
+		$query = $this->products_m->get_all();
 		
+		
+		$this->template
 			->title($this->module_details['name'])
-			->set('products', $this->products_m->get())
+			->set('data', $query)
 			->build('admin/index');
-	}
-
-	
-	/**
-	 * Get the details of a page.
-	 *
-	 * @param int $id The id of the page.
-	 */
-	public function ajax_page_details($id)
-	{
-
 	}
 
 	
@@ -61,11 +51,13 @@ class Admin extends Admin_Controller {
 	 */
 	public function create()
 	{
-		$this->template
+// 		$this->template
 		
-		->title($this->module_details['name'])
-		->set('products', $this->products_m->update())
-		->build('admin/index');
+// 		->title($this->module_details['name'])
+// 		->set('products', $this->products_m->update())
+// 		->build('admin/index');
+
+		echo 'Create New Product';
 	}
 
 	/**

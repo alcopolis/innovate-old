@@ -17,19 +17,68 @@ class Module_Products extends Module {
 				'skip_xss' => true,
 				'menu' => 'content',
 				
-				'roles' => array(
-						'put_live', 'edit_live', 'delete_live',
-						'create_types', 'edit_types', 'delete_types'
-				),
+				'sections' => array(
+						'products' => array(
+								'name' => 'Products',
+								'uri' => 'admin/products',
+									'shortcuts' => array(
+											'create' => array(
+													'name' 	=> 'products:create',
+													'uri' 	=> 'admin/products/create',
+													'class' => 'add'
+											)
+									)
+						),
+						'packages' => array(
+								'name' => 'Product Packages',
+								'uri' => 'admin/products/packages',
+								'shortcuts' => array(
+										'create' => array(
+												'name' 	=> 'Add packages',
+												'uri' 	=> 'admin/products/packages/create',
+												'class' => 'add'
+										)
+								)
+						),
+				)
 		);
 	}
 	
+	
+	
 	public function install()
 	{
-		$this->dbforge->drop_table('inn_product_features');
-		$this->dbforge->drop_table('inn_products');
+		//$this->dbforge->drop_table('inn_products_data');
+		//$this->dbforge->drop_table('inn_products_packages');
+
+		$this->install_tables(array(
+			'inn_products_packages' => array(
+				'id' => array('type' => 'INT','constraint' => '11','auto_increment' => TRUE, 'primary' => TRUE),
+				'prod_id' => array('type' => 'INT','constraint' => '11'),
+				'name' => array('type' => 'VARCHAR','constraint' => '100'),   
+				'price' => array('type' => 'VARCHAR','constraint' => '100'),
+				'desc' => array('type' => 'TEXT'),
+				'pack_item_info' => array('type' => 'TEXT')
+			)
+		));
+
+		$prod = array(
+				'id' => array('type' => 'INT','constraint' => '11','auto_increment' => TRUE, 'primary' => TRUE),
+				'name' => array('type' => 'VARCHAR','constraint' => '100'),
+				'slug' =>  array('type' => 'VARCHAR','constraint' => '100'),   //
+				'desc' => array('type' => 'TEXT'),
+				'is_featured' => array('type' => 'BOOLEAN'),
+				'poster' => array('type' => 'TEXT'),
+				'tags' =>  array('type' => 'VARCHAR','constraint' => '255'),
+		);
 		
-		return TRUE;
+		$this->dbforge->add_field($prod);
+		$this->dbforge->add_key('id', TRUE);
+		
+		if($this->dbforge->create_table('inn_products_data'))
+		{
+			return TRUE;
+		}
 	}
 	
 	public function uninstall()

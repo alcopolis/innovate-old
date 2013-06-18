@@ -8,12 +8,12 @@
  * @package PyroCMS\Core\Modules\Pages\Models
  *
  */
-class Products_m extends MY_Model
+class Packages_m extends MY_Model
 {
 	public function __construct() {
 		parent::__construct();
 		
-		$this->_table = 'inn_products_data';
+		$this->_table = 'inn_products_packages';
 	}
 	
 	public function get($slug){
