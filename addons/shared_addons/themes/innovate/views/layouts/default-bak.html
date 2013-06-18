@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+	{{ theme:partial name="metadata" }}
+</head>
+<body id="top">
+
+	<!-- Begin pageWrapper -->
+	<div id="pageWrapper">
+		{{ integration:analytics }}
+				
+		<!-- Begin Header Content -->
+		<div class="contentWrapper">
+			{{ theme:partial name="header" }}
+		</div>
+		<!-- End Header Content -->
+		
+		<!-- Begin Body Content -->
+		<div class="contentWrapper">
+			{{ theme:partial name="content_default" }}
+			{{ theme:partial name="footer" }}
+		</div>
+		<!-- End Body Content -->
+
+	</div>
+	<!-- End pageWrapper -->
+
+</body>
+</html>
