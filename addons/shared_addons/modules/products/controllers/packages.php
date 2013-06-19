@@ -24,15 +24,24 @@ class Packages extends Admin_Controller {
 	public function index()
 	{
 		//$query = $this->products_m->get_all();
+		$query = '';
+		
+		echo $this->section;
 
 		$this->template
 			->title($this->module_details['name'])
-			//->set('data', $query)
+			->set('data', $query)
 			->build('admin/packages');
 	}
 	
 	public function create()
 	{
 		echo 'Create New Packages';
+		$query = '';
+		
+		$this->template
+		->title($this->module_details['name'])
+		->set('data', $query)
+		->build('admin/packages');
 	}
 }
